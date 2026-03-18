@@ -1,5 +1,5 @@
-import { db } from "@/utils/connect";
-import { getUser } from "@/utils/getUser";
+import { db } from "../utils/connect";
+import { getUser } from "../utils/getUser";
 import { redirect } from "next/navigation";
 
 export default async function SingleBookPage({ params }) {

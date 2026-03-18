@@ -1,6 +1,6 @@
 import { auth } from "@clerk/nextjs/server";
 import { redirect } from "next/navigation";
-import { db } from "@/utils/connect";
+import { db } from "../utils/connect";
 
 export default function OnboardingPage() {
   async function handleSubmitNewUser(formData) {

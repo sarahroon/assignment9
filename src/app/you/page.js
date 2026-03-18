@@ -1,5 +1,5 @@
-import { getUser } from "@/utils/getUser";
-import { db } from "@/utils/connect";
+import { getUser } from "../utils/getUser";
+import { db } from "../utils/connect";
 import Link from "next/link";
 
 export default async function UserPage() {
@@ -32,7 +32,7 @@ export default async function UserPage() {
       <div>
         <h2>Your reviews</h2>
         {reviews.length === 0 ? (
-          <p>You haven't reviewed anything yet</p>
+          <p>You haven`t reviewed anything yet</p>
         ) : (
           <ul>
             {reviews.map((review) => (
