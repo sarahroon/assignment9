@@ -1,43 +1,48 @@
-import { db } from "../utils/connect";
-import { getUser } from "../utils/getUser";
+import { db } from "@/utils/connect";
+import { getUser } from "@/utils/getUser";
 import { redirect } from "next/navigation";
 
 export default async function SingleBookPage({ params }) {
-  // make sure user is loggged in
+  // make sure user is logged in
   const user = await getUser();
 
-  // get the book id form the URL params
-  const { id } = await params;
+  // get the book id from the URL params
+  const { id } = params;
 
   // get the book from the database by its id
   const book = (await db.query(`SELECT * FROM books WHERE id = $1`, [id]))
     .rows[0];
 
-  // if the book doesnt exist we could redirect or show a message
+  // if the book doesn't exist, redirect
+  if (!book) {
+    redirect("/");
+  }
+
+  // get reviews for this book
   const reviews = (
     await db.query(
       `
-        SELECT review.content, user_account.username
+        SELECT review.id, review.content, user_account.username
         FROM review 
         JOIN user_account 
         ON review.user_id = user_account.id 
-        WHERE review.book_id= $1;`,
+        WHERE review.book_id = $1;
+      `,
       [id],
     )
   ).rows;
 
   async function handleSubmitReview(formData) {
     "use server";
+
     // extract content value from form
     const { content } = Object.fromEntries(formData);
 
     // get the currently logged in user details
     const user = await getUser();
 
-    console.log(user);
-
     await db.query(
-      `insert into review (user_id, book_id, content) values ($1, $2, $3)`,
+      `INSERT INTO review (user_id, book_id, content) VALUES ($1, $2, $3)`,
       [user[0].id, id, content],
     );
 
@@ -65,7 +70,7 @@ export default async function SingleBookPage({ params }) {
           )}
           {book.description && <p className="mt-4">{book.description}</p>}
           {book.quote && (
-            <p className="mt-4 italic opacity-70">"{book.quote}"</p>
+            <p className="mt-4 italic opacity-70">{`"${book.quote}"`}</p>
           )}
         </div>
       </div>

@@ -1,5 +1,5 @@
-import { getUser } from "../utils/getUser";
-import { db } from "../utils/connect";
+import { getUser } from "@/utils/getUser";
+import { db } from "@/utils/connect";
 import Link from "next/link";
 
 export default async function UserPage() {
