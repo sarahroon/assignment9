@@ -1,10 +1,8 @@
-// src/utils/getUser.js
-import { db } from "./connect.js";
+import { db } from "./connect";
 
-export async function getUser() {
-  // Simulate a logged-in user
-  const userId = 1; // Replace with real auth logic if needed
+export async function getUser(id) {
+  if (!id) return null;
 
-  const result = await db.query("SELECT * FROM user_account WHERE id = $1", [userId]);
+  const result = await db.query("SELECT * FROM user_account WHERE id = $1", [id]);
   return result.rows[0] || null;
 }
