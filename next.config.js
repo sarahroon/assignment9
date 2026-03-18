@@ -1,14 +1,8 @@
+/** @type {import('next').NextConfig} */
 const nextConfig = {
-  reactStrictMode: true,
-  turbopack: {},
-
-  images: {
-    remotePatterns: [],
-},
-
   experimental: {
-    appDir: true,
+    turbopack: {},
   },
-},
+};
 
 export default nextConfig;
