@@ -1,7 +1,10 @@
-/** @type {import('next').NextConfig} */
+import path from "path";
+
 const nextConfig = {
-  reactStrictMode: true,
-  // experimental: { turbo: true }, // REMOVE THIS
+  webpack: (config) => {
+    config.resolve.alias["@"] = path.resolve("./src");
+    return config;
+  },
 };
 
 export default nextConfig;
