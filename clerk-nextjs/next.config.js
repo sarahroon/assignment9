@@ -1,7 +1,7 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  /* config options here */
-  reactCompiler: true,
+  reactStrictMode: true,
+  // You can add other options here, but remove experimental.turbo
 };
 
 export default nextConfig;
