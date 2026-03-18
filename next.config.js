@@ -2,13 +2,26 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
+
+  // Experimental Turbopack settings (required for Next 16+)
   experimental: {
-    turbo: {}, // this tells Next.js you are okay with Turbopack
+    turbo: {}, // Enables Turbopack safely
   },
-  // Optional: if you had custom webpack before, you can keep it:
+
+  // Optional: keep custom webpack configuration if you have any
   webpack(config, options) {
+    // You can add custom rules here if needed
+    // Example: config.module.rules.push(...)
     return config;
   },
+
+  // Environment variables can be loaded from .env.local automatically
+  env: {
+    DATABASE_URL: process.env.DATABASE_URL,
+  },
+
+  // Optional: Vercel optimization
+  swcMinify: true,
 };
 
 export default nextConfig;
